@@ -4,7 +4,7 @@
 import os
 import re
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyDtaKXbLxRwjgiFNnRNCLg50L_dT1GBjTM")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 # ── Topics that should be refused (opinionated / advice-seeking) ──────────────
 ADVICE_PATTERNS = [
