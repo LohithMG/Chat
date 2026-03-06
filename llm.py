@@ -102,7 +102,7 @@ def _template_answer(query: str, chunks: list, error: str = "") -> dict:
     """Simple template answer when no API key is set."""
     if not chunks:
         return {
-            "answer": "I don't have information about that in my knowledge base. Please check the official HDFC AMC website.",
+            "answer": "I am a mutual fund FAQ assistant and can only answer questions related to HDFC AMC mutual funds based on the provided facts. I don't have information about other topics.",
             "source": "https://www.hdfcfund.com",
             "chunks": [],
         }
