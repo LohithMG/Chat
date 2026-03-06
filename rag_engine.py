@@ -62,6 +62,8 @@ def retrieve(query: str, top_k: int = 3):
 
     q_emb = model.encode([query], convert_to_numpy=True).astype(np.float32)
     q_emb = q_emb / np.linalg.norm(q_emb, axis=1, keepdims=True)
+    # FAISS requires C-contiguous, strictly float32 arrays
+    q_emb = np.ascontiguousarray(q_emb, dtype=np.float32)
 
     scores, indices = index.search(q_emb, top_k)
 
