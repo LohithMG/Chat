@@ -21,7 +21,7 @@ INDEX_PATH = os.path.join(os.path.dirname(__file__), "faiss_index.pkl")
 
 
 def build_index():
-    """Embed all corpus chunks and build a FAISS index. Saves to disk."""
+    """Embed all corpus chunks and build an in-memory FAISS index."""
     model = _load_model()
     faiss = _load_faiss()
 
@@ -37,20 +37,13 @@ def build_index():
     index = faiss.IndexFlatIP(dim)  # Inner product = cosine after normalization
     index.add(embeddings)
 
-    with open(INDEX_PATH, "wb") as f:
-        pickle.dump({"index": index, "corpus": CORPUS, "embeddings": embeddings}, f)
-
-    print(f"✅ Index built: {len(CORPUS)} chunks indexed.")
+    print(f"✅ Index built (in-memory): {len(CORPUS)} chunks indexed.")
     return index, CORPUS
 
 
 def load_index():
-    """Load pre-built FAISS index from disk, or build if missing."""
-    if not os.path.exists(INDEX_PATH):
-        return build_index()
-    with open(INDEX_PATH, "rb") as f:
-        data = pickle.load(f)
-    return data["index"], data["corpus"]
+    """Build and return the FAISS index."""
+    return build_index()
 
 
 def retrieve(query: str, top_k: int = 3):
