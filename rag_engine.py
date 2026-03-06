@@ -63,7 +63,7 @@ def retrieve(query: str, top_k: int = 3):
     results = []
     for score, idx in zip(scores[0], indices[0]):
         # Filter out chunks with low cosine similarity (off-topic queries)
-        if idx < len(corpus) and score > 0.35:
+        if idx < len(corpus) and score > 0.30:
             results.append({
                 "text": corpus[idx]["text"],
                 "source": corpus[idx]["source"],
